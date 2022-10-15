@@ -3,10 +3,14 @@ let currentAnswer = undefined;
 //by default, before a second number is typed by user, the "current answer" will be undefined.
 //the job of currentAnswer is to be taken in recursively by the math operations.
 let currentNumber = undefined;
-//this number will be updated every time an operation button is pressed.
-let lastOpp = undefined;
+//this number will be updated every time an operation button is pressed. Holds second opperand.
+let prevNumber = undefined;
+//holds the first opperand
+let currentOpp = undefined;
 //lastOpp stores the last opperator used so that the "=" button can know what the final compute is 
-
+let lastOpp =undefined;
+//is the answer being displayed or are you typing in a statement?
+let answerDisplayed = false;
 
 
 
@@ -16,12 +20,14 @@ function appendCurrentNumber(num){
   alert(`currentNumber is currently ${currentNumber}`)
   if (currentNumber == undefined){
     currentNumber = num;
+    initializeCurrentAnswer();
     alert(`was undefined but now is ${currentNumber}`)
   } else if (Number.isInteger(currentNumber)){
     let tempString = num.toString();
     //must be made into a string temporarily to append num to the end.
     currentNumber = parseInt(currentNumber) + tempString;
-    currentNumber = parseInt(currentNumber)
+    currentNumber = parseInt(currentNumber);
+    initializeCurrentAnswer();
     //converted back to number in the global var
     alert(`you added ${tempString} to currentNumber and now currentNumber is ${currentNumber} `)
   } else{
@@ -29,8 +35,20 @@ function appendCurrentNumber(num){
   }
 }
 
+function initializeCurrentAnswer(){
+  if (Number.isInteger(currentAnswer)) return;
+  if (!Number.isInteger(currentAnswer)){
+    currentAnswer = currentNumber;
+  }
+}
 
 //////OPERATION FUNCTIONS//////////////////
+function operate (num1, num2, arg3){
+    return(arg3(num1, num2));
+    //use this to call whatever function you want against the total so far and the most recent user typed number
+    //even if currentAnswer is undefined, the functions will have an if-block to expect that
+}
+
 function add(addend1, addend2){
     let num1 = addend1
     let num2
@@ -46,7 +64,8 @@ function add(addend1, addend2){
     
 }
 
-function subtract(minuend, subtrahend) {
+
+function subtract(subtrahend, minuend) {
     //subtracts the first arg by the second arg
     let num1 = minuend;
     let num2;
@@ -103,11 +122,7 @@ function divide (dividend, divisor){
 
 
 
-function operate (num1, num2, arg3){
-    return(arg3(num1, num2));
-    //use this to call whatever function you want against the total so far and the most recent user typed number
-    //even if currentAnswer is undefined, the functions will have an if-block to expect that
-}
+
 
 
 
@@ -199,14 +214,23 @@ switch (this.id){
     break;
 
   case "plus":
-    alert("plus sign pressed");
-    addToDisplay(" + ");
-    lastOpp = add;
-    operate(currentNumber, currentAnswer, lastOpp);
-    alert(`${currentNumber} was added. Running total is ${currentAnswer}`);
-    clearCurrentNumber();
+    plus();   
+    break;
 
-    
+  case "minus":
+    minus();   
+    break;
+      
+  case "times":
+    times();   
+    break;
+  
+  case "division":
+    division();   
+    break;
+
+  case "equals":
+    equals();   
     break;
 
   default:
@@ -222,16 +246,87 @@ document.getElementById('clear').onclick = onClick;
 document.getElementById('test-button-2').onclick = onClick;
 document.getElementById('test-button-3').onclick = onClick;
 document.getElementById('plus').onclick = onClick;
+document.getElementById('minus').onclick = onClick;
+document.getElementById('times').onclick = onClick;
+document.getElementById('division').onclick = onClick;
+document.getElementById('equals').onclick = onClick;
 
 
 
 
+//////////Button Functions////////////////
+function plus(){ 
+  alert("plus sign pressed");
+  alert(`C ${currentNumber} P ${prevNumber} A ${currentAnswer}`);
+  currentOpp = add;
+  addToDisplay(" + ");
+  
+  if (lastOpp != undefined){
+    operate(prevNumber, currentAnswer, lastOpp);
+  } else{
+    alert("lastOpp not yet defined");
+  }
+  
+  lastOpp = add;
+  prevNumber = currentNumber;
+  clearCurrentNumber();
+  alert(`C ${currentNumber} P ${prevNumber} A ${currentAnswer}`);
+}
 
+function minus(){ 
+  alert("minus sign pressed");
+  addToDisplay(" - ");
+  lastOpp = subtract;
+  operate(currentNumber, currentAnswer, lastOpp);
+  alert(`${currentNumber} was used for subtraction. Running total is ${currentAnswer}`);
+  clearCurrentNumber();
+}
+
+function times(){ 
+  alert("times sign pressed");
+  addToDisplay(" X ");
+  lastOpp = multiply;
+  operate(currentNumber, currentAnswer, lastOpp);
+  alert(`${currentNumber} was multiplied. Running total is ${currentAnswer}`);
+  clearCurrentNumber();
+}
+
+function division(){ 
+  alert("division sign pressed");
+  addToDisplay(" / ");
+  lastOpp = divide;
+  operate(currentNumber, currentAnswer, lastOpp);
+  alert(`${currentNumber} was divided. Running total is ${currentAnswer}`);
+  clearCurrentNumber();
+}
+
+function equals(){
+  alert("equals sign pressed");
+  alert(`C ${currentNumber} P ${prevNumber} A ${currentAnswer}`);
+  currentOpp = equals;
+  addToDisplay(" = ");
+  
+  if (lastOpp != undefined){
+    operate(prevNumber, currentAnswer, lastOpp);
+  } else{
+    alert("lastOpp not yet defined");
+  }
+  
+  lastOpp = currentOpp;
+  prevNumber = currentNumber;
+  clearCurrentNumber();
+  clearDisplay();
+  displayThisThing(currentAnswer);
+  answerDisplayed = true;
+  alert(`C ${currentNumber} P ${prevNumber} A ${currentAnswer}`);
+
+
+}
 
 //test in display
-clearDisplay()
-addToDisplay(operate(1, currentAnswer, add))
-addToDisplay(operate(1, currentAnswer, add))
-addToDisplay(operate(1, currentAnswer, add))
+// clearDisplay()
+// addToDisplay(operate(1, currentAnswer, add))
+// addToDisplay(operate(1, currentAnswer, add))
+// addToDisplay(operate(1, currentAnswer, add))
 
 
