@@ -1,3 +1,5 @@
+//TODO: write functions that call the right arg into operate() when the button is pressed. 
+
 ///////GLOBAL VARIABLES/////////////
 let currentAnswer = undefined;
 //by default, before a second number is typed by user, the "current answer" will be undefined.
@@ -116,4 +118,31 @@ function displayThisThing (string){
     let display = document.querySelector("#display");
     let currentDisplay = display.innerText = "";
   }
-  
+
+
+
+
+/////BUTTON SWITCHBOARD///////////
+//switch block gets id from button click and runs function based on id
+const onClick = function() {
+  switch (this.id){
+    case "test-button-1":
+      alert("switch 1 worked");
+      break;
+    
+    case "test-button-2":
+      alert("switch 2 worked");
+      break;
+      
+    case "test-button-3":
+      alert("switch 3 worked");
+      break;
+    default:
+      alert("you messed up");
+     
+  }
+}
+///////All buttons mapped by id to run an onClick function////////
+  document.getElementById('test-button-1').onclick = onClick;
+  document.getElementById('test-button-2').onclick = onClick;
+  document.getElementById('test-button-3').onclick = onClick;
