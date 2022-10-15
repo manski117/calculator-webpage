@@ -20,19 +20,20 @@ function appendCurrentNumber(num){
   alert(`currentNumber is currently ${currentNumber}`)
   if (currentNumber == undefined){
     currentNumber = num;
-    initializeCurrentAnswer();
+    
     alert(`was undefined but now is ${currentNumber}`)
   } else if (Number.isInteger(currentNumber)){
     let tempString = num.toString();
     //must be made into a string temporarily to append num to the end.
     currentNumber = parseInt(currentNumber) + tempString;
     currentNumber = parseInt(currentNumber);
-    initializeCurrentAnswer();
+    
     //converted back to number in the global var
     alert(`you added ${tempString} to currentNumber and now currentNumber is ${currentNumber} `)
   } else{
     alert("ERROR: check currentNumber")
   }
+  
 }
 
 function initializeCurrentAnswer(){
@@ -257,6 +258,7 @@ document.getElementById('equals').onclick = onClick;
 //////////Button Functions////////////////
 function plus(){ 
   alert("plus sign pressed");
+  initializeCurrentAnswer();
   alert(`C ${currentNumber} P ${prevNumber} A ${currentAnswer}`);
   currentOpp = add;
   addToDisplay(" + ");
