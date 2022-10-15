@@ -3,9 +3,31 @@ let currentAnswer = undefined;
 //by default, before a second number is typed by user, the "current answer" will be undefined.
 //the job of currentAnswer is to be taken in recursively by the math operations.
 let currentNumber = undefined;
-//this number will be updated every time an operation button is pressed. 
+//this number will be updated every time an operation button is pressed.
+let lastOpp = undefined;
+//lastOpp stores the last opperator used so that the "=" button can know what the final compute is 
 
 
+
+
+//update the currentNumber when the user presses a number
+function appendCurrentNumber(num){
+  //append the number the user typed onto an empty or int global variable
+  alert(`currentNumber is currently ${currentNumber}`)
+  if (currentNumber == undefined){
+    currentNumber = num;
+    alert(`was undefined but now is ${currentNumber}`)
+  } else if (Number.isInteger(currentNumber)){
+    let tempString = num.toString();
+    //must be made into a string temporarily to append num to the end.
+    currentNumber = parseInt(currentNumber) + tempString;
+    currentNumber = parseInt(currentNumber)
+    //converted back to number in the global var
+    alert(`you added ${tempString} to currentNumber and now currentNumber is ${currentNumber} `)
+  } else{
+    alert("ERROR: check currentNumber")
+  }
+}
 
 
 //////OPERATION FUNCTIONS//////////////////
@@ -105,8 +127,11 @@ function addToDisplay (string){
   let currentDisplay = display.innerText;
   display.style.color = "red";
   //add the new string to the old string
+  if (currentNumber == undefined){
+    display.innerText = currentDisplay + "  " + string;
+  } else{
   display.innerText = currentDisplay + "" + string;
-
+    }
 }
 
 function clearDisplay(){
@@ -114,10 +139,18 @@ function clearDisplay(){
   let display = document.querySelector("#display");
   let currentDisplay = display.innerText = "";
 }
+function clearCurrentNumber(){
+  currentNumber = undefined;
+}
+function clearLastOpp(){
+  lastOpp = undefined;
+}
 
 function clearAll(){
   clearDisplay();
+  clearLastOpp();
   currentNumber = undefined;
+  currentAnswer = undefined;
 
 }
 
@@ -126,6 +159,8 @@ function clearAll(){
 //////////////
 ////////////////
 /////////////////// experimental code
+
+////////////////BUTTON FUNCTION SWITCHBOARD///////////////////////////
 //switch block gets id from button click and runs function based on id
 const onClick = function() {
 switch (this.id){
@@ -162,6 +197,18 @@ switch (this.id){
   case "test-button-3":
     alert("switch 3 worked");
     break;
+
+  case "plus":
+    alert("plus sign pressed");
+    addToDisplay(" + ");
+    lastOpp = add;
+    operate(currentNumber, currentAnswer, lastOpp);
+    alert(`${currentNumber} was added. Running total is ${currentAnswer}`);
+    clearCurrentNumber();
+
+    
+    break;
+
   default:
     alert("you messed up");
    
@@ -174,20 +221,7 @@ document.getElementById('nine').onclick = onClick;
 document.getElementById('clear').onclick = onClick;
 document.getElementById('test-button-2').onclick = onClick;
 document.getElementById('test-button-3').onclick = onClick;
-
-
-
-
-// operate(1, currentAnswer, add);
-//   addToDisplay(currentAnswer);
-//   if (this.id == "test-button-1"){
-//     alert("it worked 1")
-//   } else if(this.id == "test-button-2"){
-//     alert("it worked 2")
-//   } else{
-//     alert("it did not work :(")
-//   }
-  // alert(this.id, this.innerHTML);
+document.getElementById('plus').onclick = onClick;
 
 
 
@@ -201,20 +235,3 @@ addToDisplay(operate(1, currentAnswer, add))
 addToDisplay(operate(1, currentAnswer, add))
 
 
-function appendCurrentNumber(num){
-//append the number the user typed onto an empty or int global variable
-alert(`currentNumber is currently ${currentNumber}`)
-if (currentNumber == undefined){
-  currentNumber = num;
-  alert(`was undefined but now is ${currentNumber}`)
-} else if (Number.isInteger(currentNumber)){
-  let tempString = num.toString();
-  //must be made into a string temporarily to append num to the end.
-  currentNumber = parseInt(currentNumber) + tempString;
-  currentNumber = parseInt(currentNumber)
-  //converted back to number in the global var
-  alert(`you added ${tempString} to currentNumber and now currentNumber is ${currentNumber} `)
-} else{
-  alert("ERROR: check currentNumber")
-}
-}
