@@ -1,10 +1,8 @@
-//TODO: write functions that call the right arg into operate() when the button is pressed. 
-
 ///////GLOBAL VARIABLES/////////////
 let currentAnswer = undefined;
 //by default, before a second number is typed by user, the "current answer" will be undefined.
 //the job of currentAnswer is to be taken in recursively by the math operations.
-let currentNumber = 2;
+let currentNumber = undefined;
 //this number will be updated every time an operation button is pressed. 
 
 
@@ -92,76 +90,131 @@ function operate (num1, num2, arg3){
 
 
 
-
-
 ////FUNCTIONS USED TO UPDATE DISPLAY///////////
 function displayThisThing (string){
-    //replaces the whole readout with whatever the passed in string is
-    let display = document.querySelector("#display");
-    display.style.color = "red";
-    display.innerText = string;
-  }
-  
-  function addToDisplay (string){
-    //adds the passed in string to the end of the display readout
-    let display = document.querySelector("#display");
-    //get the current string that is displayed with .innerText
-    let currentDisplay = display.innerText;
-    display.style.color = "red";
-    //add the new string to the old string
-    display.innerText = currentDisplay + " " + string;
-  
-  }
-  
-  function clearDisplay(){
-    //replace existing text with a blank string
-    let display = document.querySelector("#display");
-    let currentDisplay = display.innerText = "";
-  }
+  //replaces the whole readout with whatever the passed in string is
+  let display = document.querySelector("#display");
+  display.style.color = "red";
+  display.innerText = string;
+}
+
+function addToDisplay (string){
+  //adds the passed in string to the end of the display readout
+  let display = document.querySelector("#display");
+  //get the current string that is displayed with .innerText
+  let currentDisplay = display.innerText;
+  display.style.color = "red";
+  //add the new string to the old string
+  display.innerText = currentDisplay + "" + string;
+
+}
+
+function clearDisplay(){
+  //replace existing text with a blank string
+  let display = document.querySelector("#display");
+  let currentDisplay = display.innerText = "";
+}
+
+function clearAll(){
+  clearDisplay();
+  currentNumber = undefined;
+
+}
 
 
 
-
-/////BUTTON SWITCHBOARD///////////
+//////////////
+////////////////
+/////////////////// experimental code
 //switch block gets id from button click and runs function based on id
 const onClick = function() {
-  switch (this.id){
-    case "test-button-1":
-      alert("switch 1 worked");
-      break;
+switch (this.id){
+  case "seven":
+    alert("you pressed 7");
+    appendCurrentNumber(7);
+    addToDisplay("7");
     
-    case "test-button-2":
-      alert("switch 2 worked");
-      break;
-      
-    case "test-button-3":
-      alert("switch 3 worked");
-      break;
-    default:
-      alert("you messed up");
-     
-  }
+    break;
+    
+  case "eight":
+    alert("you pressed 8");
+    appendCurrentNumber(8);
+    addToDisplay("8");
+    
+    break;
+    
+  case "nine":
+    alert("you pressed 9");
+    appendCurrentNumber(9);
+    addToDisplay("9");
+    
+    break;
+    
+  case "clear":
+    alert("clear button pressed");
+    clearAll();
+    break;
+  
+  case "test-button-2":
+    alert("switch 2 worked");
+    break;
+    
+  case "test-button-3":
+    alert("switch 3 worked");
+    break;
+  default:
+    alert("you messed up");
+   
+}
 }
 ///////All buttons mapped by id to run an onClick function////////
-  document.getElementById('test-button-1').onclick = onClick;
-  document.getElementById('test-button-2').onclick = onClick;
-  document.getElementById('test-button-3').onclick = onClick;
+document.getElementById('seven').onclick = onClick;
+document.getElementById('eight').onclick = onClick;
+document.getElementById('nine').onclick = onClick;  
+document.getElementById('clear').onclick = onClick;
+document.getElementById('test-button-2').onclick = onClick;
+document.getElementById('test-button-3').onclick = onClick;
+
+
+
+
+// operate(1, currentAnswer, add);
+//   addToDisplay(currentAnswer);
+//   if (this.id == "test-button-1"){
+//     alert("it worked 1")
+//   } else if(this.id == "test-button-2"){
+//     alert("it worked 2")
+//   } else{
+//     alert("it did not work :(")
+//   }
+  // alert(this.id, this.innerHTML);
+
+
+
+
+
+
+//test in display
+clearDisplay()
+addToDisplay(operate(1, currentAnswer, add))
+addToDisplay(operate(1, currentAnswer, add))
+addToDisplay(operate(1, currentAnswer, add))
 
 
 function appendCurrentNumber(num){
-    //append the number the user typed onto an empty or int global variable
-    alert(`currentNumber is currently ${currentNumber}`)
-    if (currentNumber == undefined){
-      currentNumber = num;
-      alert(`was undefined but now is ${currentNumber}`)
-    } else if (Number.isInteger(currentNumber)){
-      let tempString = num.toString();
-      //must be made into a string temporarily to append num to the end.
-      currentNumber = parseInt(currentNumber) + tempString;
-      currentNumber = parseInt(currentNumber)
-      //converted back to number in the global var
-      alert(`you added ${tempString} to currentNumber and now currentNumber is ${currentNumber} `)
-    } else{
-      alert("ERROR: check currentNumber")
-    }
-  }
+//append the number the user typed onto an empty or int global variable
+alert(`currentNumber is currently ${currentNumber}`)
+if (currentNumber == undefined){
+  currentNumber = num;
+  alert(`was undefined but now is ${currentNumber}`)
+} else if (Number.isInteger(currentNumber)){
+  let tempString = num.toString();
+  //must be made into a string temporarily to append num to the end.
+  currentNumber = parseInt(currentNumber) + tempString;
+  currentNumber = parseInt(currentNumber)
+  //converted back to number in the global var
+  alert(`you added ${tempString} to currentNumber and now currentNumber is ${currentNumber} `)
+} else{
+  alert("ERROR: check currentNumber")
+}
+}
