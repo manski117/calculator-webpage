@@ -178,7 +178,54 @@ function clearAll(){
 ////////////////BUTTON FUNCTION SWITCHBOARD///////////////////////////
 //switch block gets id from button click and runs function based on id
 const onClick = function() {
+
 switch (this.id){
+  case "zero":
+    alert("you pressed 0");
+    appendCurrentNumber(0);
+    addToDisplay("0");
+    
+    break;
+  case "one":
+    alert("you pressed 1");
+    appendCurrentNumber(1);
+    addToDisplay("1");
+    
+    break;
+    
+  case "two":
+    alert("you pressed 2");
+    appendCurrentNumber(2);
+    addToDisplay("2");
+    
+    break;
+    
+  case "three":
+    alert("you pressed 3");
+    appendCurrentNumber(3);
+    addToDisplay("3");
+    
+    break;
+  case "four":
+    alert("you pressed 4");
+    appendCurrentNumber(4);
+    addToDisplay("4");
+    
+    break;
+    
+  case "five":
+    alert("you pressed 5");
+    appendCurrentNumber(5);
+    addToDisplay("5");
+    
+    break;
+    
+  case "six":
+    alert("you pressed 6");
+    appendCurrentNumber(6);
+    addToDisplay("6");
+    
+    break;
   case "seven":
     alert("you pressed 7");
     appendCurrentNumber(7);
@@ -197,6 +244,13 @@ switch (this.id){
     alert("you pressed 9");
     appendCurrentNumber(9);
     addToDisplay("9");
+    
+    break;
+
+  case "decimal":
+    alert("you pressed .");
+    alert("ERROR: CANNOT YET ADD DECIMALS")
+    // addToDisplay(".");
     
     break;
     
@@ -233,12 +287,20 @@ switch (this.id){
     equals();   
     break;
 
+
   default:
     alert("you messed up");
    
 }
 }
 ///////All buttons mapped by id to run an onClick function////////
+document.getElementById('zero').onclick = onClick;
+document.getElementById('one').onclick = onClick;
+document.getElementById('two').onclick = onClick;
+document.getElementById('three').onclick = onClick;
+document.getElementById('four').onclick = onClick;
+document.getElementById('five').onclick = onClick;
+document.getElementById('six').onclick = onClick;
 document.getElementById('seven').onclick = onClick;
 document.getElementById('eight').onclick = onClick;
 document.getElementById('nine').onclick = onClick;  
@@ -250,7 +312,7 @@ document.getElementById('minus').onclick = onClick;
 document.getElementById('times').onclick = onClick;
 document.getElementById('division').onclick = onClick;
 document.getElementById('equals').onclick = onClick;
-
+document.getElementById('decimal').onclick = onClick;
 
 
 
