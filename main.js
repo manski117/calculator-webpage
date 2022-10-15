@@ -146,3 +146,22 @@ const onClick = function() {
   document.getElementById('test-button-1').onclick = onClick;
   document.getElementById('test-button-2').onclick = onClick;
   document.getElementById('test-button-3').onclick = onClick;
+
+
+function appendCurrentNumber(num){
+    //append the number the user typed onto an empty or int global variable
+    alert(`currentNumber is currently ${currentNumber}`)
+    if (currentNumber == undefined){
+      currentNumber = num;
+      alert(`was undefined but now is ${currentNumber}`)
+    } else if (Number.isInteger(currentNumber)){
+      let tempString = num.toString();
+      //must be made into a string temporarily to append num to the end.
+      currentNumber = parseInt(currentNumber) + tempString;
+      currentNumber = parseInt(currentNumber)
+      //converted back to number in the global var
+      alert(`you added ${tempString} to currentNumber and now currentNumber is ${currentNumber} `)
+    } else{
+      alert("ERROR: check currentNumber")
+    }
+  }
