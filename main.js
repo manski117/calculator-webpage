@@ -33,7 +33,6 @@ function appendCurrentNumber(num){
   } else{
     alert("ERROR: check currentNumber")
   }
-  
 }
 
 function initializeCurrentAnswer(){
@@ -101,7 +100,7 @@ function subtract(subtrahend, minuend) {
   
   
   
-function divide (dividend, divisor){
+function divide (divisor, dividend){
     let dend;
     let visor;
     dend = dividend;
@@ -256,6 +255,7 @@ document.getElementById('equals').onclick = onClick;
 
 
 //////////Button Functions////////////////
+//these functions work by calling the LAST opperator and expression when they themselves are pressed. 
 function plus(){ 
   alert("plus sign pressed");
   initializeCurrentAnswer();
@@ -264,42 +264,72 @@ function plus(){
   addToDisplay(" + ");
   
   if (lastOpp != undefined){
-    operate(prevNumber, currentAnswer, lastOpp);
+    operate(currentNumber, currentAnswer, lastOpp);
   } else{
     alert("lastOpp not yet defined");
   }
   
-  lastOpp = add;
-  prevNumber = currentNumber;
+  lastOpp = currentOpp;
+  // prevNumber = currentNumber;
   clearCurrentNumber();
   alert(`C ${currentNumber} P ${prevNumber} A ${currentAnswer}`);
 }
 
 function minus(){ 
   alert("minus sign pressed");
+  initializeCurrentAnswer();
+  alert(`C ${currentNumber} P ${prevNumber} A ${currentAnswer}`);
+  currentOpp = subtract;
   addToDisplay(" - ");
-  lastOpp = subtract;
-  operate(currentNumber, currentAnswer, lastOpp);
-  alert(`${currentNumber} was used for subtraction. Running total is ${currentAnswer}`);
+  
+  if (lastOpp != undefined){
+    operate(currentNumber, currentAnswer, lastOpp);
+  } else{
+    alert("lastOpp not yet defined");
+  }
+  
+  lastOpp = currentOpp;
+  // prevNumber = currentNumber;
   clearCurrentNumber();
+  alert(`C ${currentNumber} P ${prevNumber} A ${currentAnswer}`);
 }
 
 function times(){ 
   alert("times sign pressed");
+  initializeCurrentAnswer();
+  alert(`C ${currentNumber} P ${prevNumber} A ${currentAnswer}`);
+  currentOpp = multiply;
   addToDisplay(" X ");
-  lastOpp = multiply;
-  operate(currentNumber, currentAnswer, lastOpp);
-  alert(`${currentNumber} was multiplied. Running total is ${currentAnswer}`);
+  
+  if (lastOpp != undefined){
+    operate(currentNumber, currentAnswer, lastOpp);
+  } else{
+    alert("lastOpp not yet defined");
+  }
+  
+  lastOpp = currentOpp;
+  // prevNumber = currentNumber;
   clearCurrentNumber();
+  alert(`C ${currentNumber} P ${prevNumber} A ${currentAnswer}`);
 }
 
 function division(){ 
   alert("division sign pressed");
+  initializeCurrentAnswer();
+  alert(`C ${currentNumber} P ${prevNumber} A ${currentAnswer}`);
+  currentOpp = divide;
   addToDisplay(" / ");
-  lastOpp = divide;
-  operate(currentNumber, currentAnswer, lastOpp);
-  alert(`${currentNumber} was divided. Running total is ${currentAnswer}`);
+  
+  if (lastOpp != undefined){
+    operate(currentNumber, currentAnswer, lastOpp);
+  } else{
+    alert("lastOpp not yet defined");
+  }
+  
+  lastOpp = currentOpp;
+  // prevNumber = currentNumber;
   clearCurrentNumber();
+  alert(`C ${currentNumber} P ${prevNumber} A ${currentAnswer}`);
 }
 
 function equals(){
@@ -309,13 +339,13 @@ function equals(){
   addToDisplay(" = ");
   
   if (lastOpp != undefined){
-    operate(prevNumber, currentAnswer, lastOpp);
+    operate(currentNumber, currentAnswer, lastOpp);
   } else{
     alert("lastOpp not yet defined");
   }
   
   lastOpp = currentOpp;
-  prevNumber = currentNumber;
+  // prevNumber = currentNumber;
   clearCurrentNumber();
   clearDisplay();
   displayThisThing(currentAnswer);
