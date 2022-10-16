@@ -17,11 +17,11 @@ let answerDisplayed = false;
 //update the currentNumber when the user presses a number
 function appendCurrentNumber(num){
   //append the number the user typed onto an empty or int global variable
-  alert(`currentNumber is currently ${currentNumber}`)
+  
   if (currentNumber == undefined){
     currentNumber = num;
     
-    alert(`was undefined but now is ${currentNumber}`)
+    
   } else if (Number.isInteger(currentNumber)){
     let tempString = num.toString();
     //must be made into a string temporarily to append num to the end.
@@ -29,13 +29,15 @@ function appendCurrentNumber(num){
     currentNumber = parseInt(currentNumber);
     
     //converted back to number in the global var
-    alert(`you added ${tempString} to currentNumber and now currentNumber is ${currentNumber} `)
+    
   } else{
     alert("ERROR: check currentNumber")
   }
 }
 
 function initializeCurrentAnswer(){
+  //sets the currentAnswer to the first current number if it is not yet defined.
+  //this function is critical to ensuring that multiple-integer expressions are possible. 
   if (Number.isInteger(currentAnswer)) return;
   if (!Number.isInteger(currentAnswer)){
     currentAnswer = currentNumber;
@@ -166,14 +168,10 @@ function clearAll(){
   clearLastOpp();
   currentNumber = undefined;
   currentAnswer = undefined;
+  answerDisplayed = false;
 
 }
 
-
-
-//////////////
-////////////////
-/////////////////// experimental code
 
 ////////////////BUTTON FUNCTION SWITCHBOARD///////////////////////////
 //switch block gets id from button click and runs function based on id
@@ -181,67 +179,66 @@ const onClick = function() {
 
 switch (this.id){
   case "zero":
-    alert("you pressed 0");
     appendCurrentNumber(0);
     addToDisplay("0");
     
     break;
   case "one":
-    alert("you pressed 1");
+    
     appendCurrentNumber(1);
     addToDisplay("1");
     
     break;
     
   case "two":
-    alert("you pressed 2");
+    
     appendCurrentNumber(2);
     addToDisplay("2");
     
     break;
     
   case "three":
-    alert("you pressed 3");
+    
     appendCurrentNumber(3);
     addToDisplay("3");
     
     break;
   case "four":
-    alert("you pressed 4");
+    
     appendCurrentNumber(4);
     addToDisplay("4");
     
     break;
     
   case "five":
-    alert("you pressed 5");
+    
     appendCurrentNumber(5);
     addToDisplay("5");
     
     break;
     
   case "six":
-    alert("you pressed 6");
+    
     appendCurrentNumber(6);
     addToDisplay("6");
     
     break;
   case "seven":
-    alert("you pressed 7");
+    
     appendCurrentNumber(7);
     addToDisplay("7");
     
     break;
     
   case "eight":
-    alert("you pressed 8");
+    
     appendCurrentNumber(8);
     addToDisplay("8");
     
     break;
     
   case "nine":
-    alert("you pressed 9");
+    
     appendCurrentNumber(9);
     addToDisplay("9");
     
@@ -249,22 +246,22 @@ switch (this.id){
 
   case "decimal":
     alert("you pressed .");
-    alert("ERROR: CANNOT YET ADDED")
+    alert("ERROR: FUNCTIONALITY NOT YET ADDED")
     addToDisplay(".");
     
     break;
     
   case "clear":
-    alert("clear button pressed");
+    
     clearAll();
     break;
   
   case "test-button-2":
-    alert("switch 2 worked");
+    alert("FUNCTIONALITY NOT YET ADDED");
     break;
     
   case "test-button-3":
-    alert("switch 3 worked");
+    alert("FUNCTIONALITY NOT YET ADDED");
     break;
 
   case "plus":
@@ -319,108 +316,100 @@ document.getElementById('decimal').onclick = onClick;
 //////////Button Functions////////////////
 //these functions work by calling the LAST opperator and expression when they themselves are pressed. 
 function plus(){ 
-  alert("plus sign pressed");
+  
   initializeCurrentAnswer();
-  alert(`C ${currentNumber} P ${prevNumber} A ${currentAnswer}`);
+  
   currentOpp = add;
   addToDisplay(" + ");
   
   if (lastOpp != undefined){
     operate(currentNumber, currentAnswer, lastOpp);
   } else{
-    alert("lastOpp not yet defined");
+    console.log("lastOpp not yet defined");
   }
   
   lastOpp = currentOpp;
-  // prevNumber = currentNumber;
   clearCurrentNumber();
-  alert(`C ${currentNumber} P ${prevNumber} A ${currentAnswer}`);
+  
 }
 
 function minus(){ 
-  alert("minus sign pressed");
+  
   initializeCurrentAnswer();
-  alert(`C ${currentNumber} P ${prevNumber} A ${currentAnswer}`);
+  
   currentOpp = subtract;
   addToDisplay(" - ");
   
   if (lastOpp != undefined){
     operate(currentNumber, currentAnswer, lastOpp);
   } else{
-    alert("lastOpp not yet defined");
+    console.log("lastOpp not yet defined");
   }
   
   lastOpp = currentOpp;
-  // prevNumber = currentNumber;
+  
   clearCurrentNumber();
-  alert(`C ${currentNumber} P ${prevNumber} A ${currentAnswer}`);
+  
 }
 
 function times(){ 
-  alert("times sign pressed");
+  
   initializeCurrentAnswer();
-  alert(`C ${currentNumber} P ${prevNumber} A ${currentAnswer}`);
+  
   currentOpp = multiply;
   addToDisplay(" X ");
   
   if (lastOpp != undefined){
     operate(currentNumber, currentAnswer, lastOpp);
   } else{
-    alert("lastOpp not yet defined");
+    console.log("lastOpp not yet defined");
   }
   
   lastOpp = currentOpp;
-  // prevNumber = currentNumber;
+  
   clearCurrentNumber();
-  alert(`C ${currentNumber} P ${prevNumber} A ${currentAnswer}`);
+  
 }
 
 function division(){ 
-  alert("division sign pressed");
+  
   initializeCurrentAnswer();
-  alert(`C ${currentNumber} P ${prevNumber} A ${currentAnswer}`);
   currentOpp = divide;
   addToDisplay(" / ");
   
   if (lastOpp != undefined){
     operate(currentNumber, currentAnswer, lastOpp);
   } else{
-    alert("lastOpp not yet defined");
+    console.log("lastOpp not yet defined");
   }
   
   lastOpp = currentOpp;
-  // prevNumber = currentNumber;
+  
   clearCurrentNumber();
-  alert(`C ${currentNumber} P ${prevNumber} A ${currentAnswer}`);
 }
 
 function equals(){
-  alert("equals sign pressed");
-  alert(`C ${currentNumber} P ${prevNumber} A ${currentAnswer}`);
-  currentOpp = equals;
-  addToDisplay(" = ");
   
+  currentOpp = equals;
+   
   if (lastOpp != undefined){
     operate(currentNumber, currentAnswer, lastOpp);
   } else{
-    alert("lastOpp not yet defined");
+    console.log("lastOpp not yet defined");
   }
   
   lastOpp = currentOpp;
-  // prevNumber = currentNumber;
-  clearCurrentNumber();
   clearDisplay();
-  displayThisThing(currentAnswer);
-  answerDisplayed = true;
-  alert(`C ${currentNumber} P ${prevNumber} A ${currentAnswer}`);
-
+  //this if-statement prevents an error if equals is pressed before the first opperator
+  if (currentAnswer == undefined){
+    displayThisThing(currentNumber);
+    answerDisplayed = true;
+  } else{
+    clearCurrentNumber();
+    displayThisThing(currentAnswer);
+    answerDisplayed = true;
+  }
+  
 
 }
-
-//test in display
-// clearDisplay()
-// addToDisplay(operate(1, currentAnswer, add))
-// addToDisplay(operate(1, currentAnswer, add))
-// addToDisplay(operate(1, currentAnswer, add))
-
 
