@@ -108,7 +108,12 @@ function divide (divisor, dividend){
     dend = dividend;
 
     //seperate if-statement to make sure it is not 0. 0 is not the default value of currentAnswer for a reason. 
-    if (divisor == 0) return "ERROR: NO / BY 0";
+    if (divisor == 0) {
+      displayThisThing("ERROR: NO / BY 0")
+      alert("ERROR: Cannot divide by zero");
+      clearAll();
+      return;
+    }
     //if statement makes sure it does not return error if no second number as been entered by the user. 
     if (divisor == undefined){
       visor = 1;
