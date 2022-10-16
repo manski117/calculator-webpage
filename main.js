@@ -177,6 +177,15 @@ function clearAll(){
 
 }
 
+function newExpression(){
+  //makes screen automatically clear if user starts to type a new expression while their previous answer is still displayed.
+  if (answerDisplayed == true){
+    clearAll();
+  } else{
+    return;
+  }
+}
+
 
 ////////////////BUTTON FUNCTION SWITCHBOARD///////////////////////////
 //switch block gets id from button click and runs function based on id
@@ -184,46 +193,47 @@ const onClick = function() {
 
 switch (this.id){
   case "zero":
+    newExpression();
     appendCurrentNumber(0);
     addToDisplay("0");
     
     break;
   case "one":
-    
+    newExpression();
     appendCurrentNumber(1);
     addToDisplay("1");
     
     break;
     
   case "two":
-    
+    newExpression();
     appendCurrentNumber(2);
     addToDisplay("2");
     
     break;
     
   case "three":
-    
+    newExpression();
     appendCurrentNumber(3);
     addToDisplay("3");
     
     break;
   case "four":
-    
+    newExpression();
     appendCurrentNumber(4);
     addToDisplay("4");
     
     break;
     
   case "five":
-    
+    newExpression();
     appendCurrentNumber(5);
     addToDisplay("5");
     
     break;
     
   case "six":
-    
+    newExpression();
     appendCurrentNumber(6);
     addToDisplay("6");
     
@@ -236,14 +246,14 @@ switch (this.id){
     break;
     
   case "eight":
-    
+    newExpression();
     appendCurrentNumber(8);
     addToDisplay("8");
     
     break;
     
   case "nine":
-    
+    newExpression();
     appendCurrentNumber(9);
     addToDisplay("9");
     
@@ -251,7 +261,8 @@ switch (this.id){
 
   case "decimal":
     alert("you pressed .");
-    alert("ERROR: FUNCTIONALITY NOT YET ADDED")
+    alert("ERROR: FUNCTIONALITY NOT YET ADDED");
+    newExpression();
     addToDisplay(".");
     
     break;
