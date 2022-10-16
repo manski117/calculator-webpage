@@ -139,7 +139,9 @@ function displayThisThing (string){
   //replaces the whole readout with whatever the passed in string is
   let display = document.querySelector("#display");
   display.style.color = "red";
-  display.innerText = string;
+  let text4display = string;
+  text4display = filterForLengthRight(text4display);
+  display.innerText = text4display;
 }
 
 function addToDisplay (string){
@@ -148,12 +150,44 @@ function addToDisplay (string){
   //get the current string that is displayed with .innerText
   let currentDisplay = display.innerText;
   display.style.color = "red";
+  let text4display;
   //add the new string to the old string
+
   if (currentNumber == undefined){
-    display.innerText = currentDisplay + "  " + string;
+    
+    text4display = currentDisplay + "  " + string;
+    
   } else{
-  display.innerText = currentDisplay + "" + string;
+    text4display = currentDisplay + "" + string;
     }
+  text4display = filterForLengthLeft(text4display);
+  display.innerText = text4display;
+  
+  
+}
+
+function filterForLengthRight(longString){
+  //make sure the display does not run off of the page for long quwe
+  let stringVar = String(longString);
+  let shortString;
+  if ((stringVar.length) > 19){
+    shortString = stringVar.slice(0, 18);
+  } else {
+    shortString = stringVar;
+  }
+  return shortString;
+}
+
+function filterForLengthLeft(longString){
+    //make sure the display does not run off of the page for long quwe
+    let stringVar = String(longString);
+    let shortString;
+    if ((stringVar.length) > 19){
+      shortString = stringVar.slice(-18);
+    } else {
+      shortString = stringVar;
+    }
+    return shortString;
 }
 
 function clearDisplay(){
