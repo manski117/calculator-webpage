@@ -138,7 +138,7 @@ function divide (divisor, dividend){
 function displayThisThing (string){
   //replaces the whole readout with whatever the passed in string is
   let display = document.querySelector("#display");
-  display.style.color = "red";
+  display.style.color = "#009900";
   let text4display = string;
   text4display = filterForLengthRight(text4display);
   display.innerText = text4display;
@@ -149,7 +149,7 @@ function addToDisplay (string){
   let display = document.querySelector("#display");
   //get the current string that is displayed with .innerText
   let currentDisplay = display.innerText;
-  display.style.color = "red";
+  display.style.color = "#009900";
   let text4display;
   //add the new string to the old string
 
